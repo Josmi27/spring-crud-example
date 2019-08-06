@@ -1,5 +1,6 @@
 package hbcu.stay.ready.crudspringexample.controllers;
 
+import hbcu.stay.ready.crudspringexample.models.Album;
 import hbcu.stay.ready.crudspringexample.models.WutangMember;
 import hbcu.stay.ready.crudspringexample.services.WutangMemberService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,12 @@ public class WutangMemberController {
     public ResponseEntity<WutangMember> post(@RequestBody WutangMember wutangMember){
         wutangMember = wutangMemberService.create(wutangMember);
         return new ResponseEntity<>(wutangMember, HttpStatus.CREATED);
+    }
+
+    @PostMapping("/members/{id}/add/album")
+    public ResponseEntity<Album> postAddAlbumToArtist(@PathVariable("id") Long id, @RequestBody Album album){
+        album = wutangMemberService.addAlbum(id, album);
+        return new ResponseEntity<>(album, HttpStatus.CREATED);
     }
 
     @GetMapping("/members/{id}")
